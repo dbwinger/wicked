@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class RedirectToNextTest < ActiveSupport::IntegrationCase
+  # TODO: Test turbolinks functionality
   test 'redirect_to_next without options' do
     step = :first
     visit(redirect_to_next_path(step, :jump_to => :last_step))

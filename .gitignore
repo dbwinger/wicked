@@ -12,3 +12,4 @@ Gemfile.lock
 .ruby-gemset
 gemfiles/*.lock
 *.gem
+.byebug_history

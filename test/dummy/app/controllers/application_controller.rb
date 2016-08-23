@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  # protect_from_forgery
   if respond_to? :before_action
     before_action :pull_out_locale
   else

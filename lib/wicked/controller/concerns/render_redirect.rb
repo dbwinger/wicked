@@ -4,9 +4,11 @@ module Wicked::Controller::Concerns::RenderRedirect
 
   def render_wizard(resource = nil, options = {})
     process_resource!(resource)
-
     if @skip_to
-      redirect_to wizard_path(@skip_to, @wicked_redirect_params || {}), options
+      respond_to do |format|
+        format.html { redirect_to wizard_path(@skip_to, @wicked_redirect_params || {}), options }
+        format.js { render js: "Turbolinks.visit('#{wizard_path(@skip_to, @wicked_redirect_params || {})}')" }
+      end
     else
       render_step wizard_value(step), options
     end
@@ -34,7 +36,10 @@ module Wicked::Controller::Concerns::RenderRedirect
     if next_step.nil?
       redirect_to_finish_wizard(options)
     else
-      redirect_to wizard_path(next_step), options
+      respond_to do |format|
+        format.html { redirect_to wizard_path(next_step), options }
+        format.js { render js: "Turbolinks.visit('#{wizard_path(next_step)}')" }
+      end
     end
   end
 
@@ -48,7 +53,9 @@ module Wicked::Controller::Concerns::RenderRedirect
     Rails.logger.debug("Wizard has finished, redirecting to finish_wizard_path: #{wicked_final_redirect_path.inspect}")
     # flash.keep is required for Rails 3 where a flash message is lost on a second redirect.
     flash.keep
-    redirect_to wicked_final_redirect_path, options
+    respond_to do |format|
+      format.html { redirect_to wicked_final_redirect_path, options }
+      format.js { render js: "Turbolinks.visit('#{wicked_final_redirect_path}')" }
+    end
   end
 end
-

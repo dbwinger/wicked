@@ -1,3 +1,5 @@
+require 'minitest/byebug' if ENV['DEBUG']
+
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 

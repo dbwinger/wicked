@@ -9,4 +9,6 @@ gemspec :path => ::File.expand_path("../.", __FILE__)
 group :development, :test do
   gem "sqlite3", :platform => [:ruby, :mswin, :mingw]
   gem "activerecord-jdbcsqlite3-adapter", '~> 1.3.13', :platform => :jruby
+  gem "byebug"
+  gem 'minitest-byebug'
 end
